@@ -23,18 +23,90 @@
 // export default NekoCat;
 
 
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Oneko } from 'lots-o-nekos';
 
 const NekoCat = () => {
+  const [currentCat, setCurrentCat] = useState('default');
+  const usedCatsRef = useRef(new Set());
+  
+  // All available cat types
+  const allCats = [
+    "ace", "black", "bunny", "calico", "default", "eevee", 
+    "esmeralda", "fox", "ghost", "gray", "jess", "kina", 
+    "lucy", "maia", "maria", "mike", "silver", "silversky", 
+    "snuupy", "spirit", "tora", "valentine"
+  ];
+
+  // Get random cat that hasn't been used yet
+  const getNextCat = () => {
+    // If all cats have been used, reset the list
+    if (usedCatsRef.current.size >= allCats.length) {
+      usedCatsRef.current.clear();
+      console.log("All cats used, restarting cycle!");
+    }
+    
+    // Get available cats (not yet used)
+    const availableCats = allCats.filter(cat => !usedCatsRef.current.has(cat));
+    
+    // Pick a random cat from available ones
+    const randomIndex = Math.floor(Math.random() * availableCats.length);
+    const selectedCat = availableCats[randomIndex];
+    
+    // Mark this cat as used
+    usedCatsRef.current.add(selectedCat);
+    
+    console.log(`Selected cat: ${selectedCat}, Used: ${usedCatsRef.current.size}/${allCats.length}`);
+    return selectedCat;
+  };
+
+  // Get Indian Standard Time
+  const getIndianTime = () => {
+    return new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+  };
+
+  // Calculate milliseconds until next 6 AM IST
+  const getTimeUntilNext6AM = () => {
+    const now = new Date();
+    const istTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+    
+    // Set next 6 AM
+    const next6AM = new Date(istTime);
+    next6AM.setHours(6, 0, 0, 0);
+    
+    // If it's already past 6 AM today, set for tomorrow
+    if (istTime >= next6AM) {
+      next6AM.setDate(next6AM.getDate() + 1);
+    }
+    
+    return next6AM - istTime;
+  };
+
+  // Initialize cat based on current day
+  useEffect(() => {
+    // Get cat for today based on day of year
+    const now = new Date();
+    const istTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+    const dayOfYear = Math.floor((istTime - new Date(istTime.getFullYear(), 0, 0)) / 86400000);
+    
+    // Calculate which cat should be shown today
+    const cyclePosition = dayOfYear % allCats.length;
+    const todaysCat = allCats[cyclePosition];
+    
+    setCurrentCat(todaysCat);
+    console.log(`Today's cat (Day ${dayOfYear}): ${todaysCat} at IST: ${getIndianTime()}`);
+  }, []);
+
   useEffect(() => {
     let catInstance = null;
+    let rotationTimeout = null;
     
     try {
-      // Initialize the cat - it starts automatically when instantiated
+      // Initialize with current cat
       catInstance = new Oneko({
         nekoSize: 32,
         nekoSpeed: 10,
+        source: `https://raw.githubusercontent.com/raynecloudy/oneko_db/refs/heads/master/${currentCat}.png`,
       });
       
       // Track mouse movement and update cat's target
@@ -65,10 +137,21 @@ const NekoCat = () => {
       document.addEventListener('touchmove', handleTouchMove, { passive: true });
       document.addEventListener('touchstart', handleTouchStart, { passive: true });
       
-      console.log("Neko cat initialized successfully.");
+      console.log(`Neko cat initialized: ${currentCat} at IST: ${getIndianTime()}`);
+      
+      // Schedule next cat change at 6 AM IST
+      const timeUntil6AM = getTimeUntilNext6AM();
+      console.log(`Next cat change in ${Math.round(timeUntil6AM / 1000 / 60 / 60)} hours at 6 AM IST`);
+      
+      rotationTimeout = setTimeout(() => {
+        const nextCat = getNextCat();
+        setCurrentCat(nextCat);
+        console.log(`Changing cat at 6 AM IST: ${getIndianTime()}`);
+      }, timeUntil6AM);
       
       // Cleanup function
       return () => {
+        clearTimeout(rotationTimeout);
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('touchmove', handleTouchMove);
         document.removeEventListener('touchstart', handleTouchStart);
@@ -83,7 +166,7 @@ const NekoCat = () => {
     } catch (error) {
       console.error("Error starting Neko cat:", error);
     }
-  }, []); // Run only once on mount
+  }, [currentCat]); // Re-run when cat changes
 
   return null; 
 };
