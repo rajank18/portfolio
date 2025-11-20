@@ -87,12 +87,15 @@
 
   <script>
     const CLIENT_ID = 'd0d18cf735cc49ebb294a111e96a3fc4';
-    const CLIENT_SECRET = '9ac21f58f989486ba7c793afcf603dbd';
+    const CLIENT_SECRET = 'aef924fc97ed498bab0f396f2ecac6a5';
     const REDIRECT_URI = 'https://rajank18.vercel.app/spotify-auth.html';
 
     function authorizeSpotify() {
-      const scopes = 'user-read-currently-playing user-read-recently-played';
-      const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(scopes)}`;
+      const scopes = [
+        'user-read-currently-playing',
+        'user-read-recently-played'
+      ];
+      const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(scopes.join(' '))}`;
       window.location.href = authUrl;
     }
 
