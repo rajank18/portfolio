@@ -11,6 +11,7 @@ import AnimatedBackground from './components/AnimatedBackground';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import NekoCat from './components/ui/cat.jsx';
+import SpotifyWidget from './components/SpotifyWidget';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -46,6 +47,12 @@ function App() {
       
       <div className="relative z-10">
         <Hero />
+        
+        {/* Spotify Widget Section */}
+        <section className="container mx-auto px-6 py-8 max-w-2xl">
+          <SpotifyWidget />
+        </section>
+        
         <About />
         <Skills />
         <Projects />
