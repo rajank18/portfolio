@@ -10,6 +10,8 @@ import Contact from './components/Contact';
 import AnimatedBackground from './components/AnimatedBackground';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
+import NekoCat from './components/ui/cat.jsx';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,6 +39,7 @@ function App() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
+      <NekoCat />
       <AnimatedBackground />
       <CustomCursor />
       <Navbar />

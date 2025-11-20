@@ -43,3 +43,11 @@ body {
   animation: blink-cursor 1s ease-in-out infinite;
 }
 
+
+/* Target the element created by lots-o-nekos */
+.oneko {
+  z-index: 9999 !important; 
+  position: fixed !important;
+  /* Ensure no pointer events on the cat itself */
+  pointer-events: none; 
+}
