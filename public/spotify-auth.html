@@ -88,7 +88,7 @@
   <script>
     const CLIENT_ID = 'd0d18cf735cc49ebb294a111e96a3fc4';
     const CLIENT_SECRET = '9ac21f58f989486ba7c793afcf603dbd';
-    const REDIRECT_URI = window.location.origin + '/spotify-auth.html';
+    const REDIRECT_URI = 'https://rajank18.vercel.app/spotify-auth.html';
 
     function authorizeSpotify() {
       const scopes = 'user-read-currently-playing user-read-recently-played';
@@ -120,7 +120,7 @@
     }
 
     // Check if redirected back with code
-    window.onload = async () => {
+    window.addEventListener('load', async function() {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
       const error = urlParams.get('error');
@@ -150,7 +150,7 @@
           document.getElementById('errorMessage').textContent = 'Error: ' + err.message;
         }
       }
-    };
+    });
   </script>
 </body>
 </html>
