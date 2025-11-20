@@ -137,16 +137,14 @@ const NekoCat = () => {
       document.addEventListener('touchmove', handleTouchMove, { passive: true });
       document.addEventListener('touchstart', handleTouchStart, { passive: true });
       
-      console.log(`Neko cat initialized: ${currentCat} at IST: ${getIndianTime()}`);
-      
       // Schedule next cat change at 6 AM IST
       const timeUntil6AM = getTimeUntilNext6AM();
-      console.log(`Next cat change in ${Math.round(timeUntil6AM / 1000 / 60 / 60)} hours at 6 AM IST`);
+
       
       rotationTimeout = setTimeout(() => {
         const nextCat = getNextCat();
         setCurrentCat(nextCat);
-        console.log(`Changing cat at 6 AM IST: ${getIndianTime()}`);
+      
       }, timeUntil6AM);
       
       // Cleanup function
@@ -161,7 +159,6 @@ const NekoCat = () => {
             catInstance.element.parentNode.removeChild(catInstance.element);
           }
         }
-        console.log("Neko cat destroyed.");
       };
     } catch (error) {
       console.error("Error starting Neko cat:", error);

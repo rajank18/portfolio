@@ -107,7 +107,7 @@ const Navbar = () => {
         <img 
           src={profileImg} 
           alt="Profile" 
-          className="w-12 h-12 rounded-2xl border-2 border-gray-300 dark:border-gray-600 object-cover"
+          className="w-12 h-12 border-2 border-gray-300 dark:border-gray-600 object-cover"
         />
       </div>
       
@@ -128,7 +128,7 @@ const Navbar = () => {
         <button
           ref={buttonRef}
           onClick={toggleTheme}
-          className="ml-2 p-2 rounded-2xl border-2 border-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+          className="ml-2 p-2  border-2 border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
           aria-label="Toggle theme"
         >
           {isDark ? (

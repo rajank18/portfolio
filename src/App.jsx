@@ -47,13 +47,13 @@ function App() {
       
       <div className="relative z-10">
         <Hero />
+        <About />
         
         {/* Spotify Widget Section */}
-        <section className="container mx-auto px-6 py-8 max-w-2xl">
+        <section className="container mx-auto px-6 -mt-12 pb-12 max-w-2xl">
           <SpotifyWidget />
         </section>
         
-        <About />
         <Skills />
         <Projects />
         <Experience />

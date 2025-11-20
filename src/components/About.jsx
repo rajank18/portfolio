@@ -32,7 +32,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen flex items-center justify-center px-6 py-20"
+      className="min-h-screen flex items-center justify-center px-6 pt-20"
     >
       <div className="max-w-3xl mx-auto">
         <h2 className="text-5xl md:text-6xl font-bold mb-12 text-center text-black dark:text-white">
