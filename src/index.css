@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-gradient: gradient 8s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  @keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+}
+
+/* Custom variant for dark mode */
+@variant dark (&:where(.dark, .dark *));
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark body {
+  background-color: #111827;
+  color: #ffffff;
+}
+
+@keyframes blink-cursor {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.1);
+    opacity: 0.5;
+  }
+}
+
+.animate-blink-cursor {
+  animation: blink-cursor 1s ease-in-out infinite;
+}
+
