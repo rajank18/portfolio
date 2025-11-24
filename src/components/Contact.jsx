@@ -64,7 +64,7 @@ const Contact = () => {
           </div>
 
           <p className="text-gray-500 dark:text-gray-400 text-sm">
-            Developed by Rajan.
+            Developed by ‎Rajan♡ ˎˊ˗
           </p>
         </div>
       </div>
