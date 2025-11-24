@@ -22,6 +22,17 @@ const Projects = () => {
       url: 'https://scanx-two.vercel.app/'
     },
     {
+      title: 'Commit With AI',
+      description: 'A npm package that writes smart git commit messages for you using top LLM, so you can focus on coding.',
+      tech: [
+        { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+        { name: 'Vercel', icon: 'https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png' },
+        { name: 'OpenRouter', icon: 'https://openrouter.ai/favicon.ico' }
+      ],
+      status: 'Developed',
+      url: 'https://www.npmjs.com/package/commit_with_ai'
+    },
+    {
       title: 'ProGrade',
       description: 'Full-stack academic evaluation system designed to automate standardized project grading via custom rubrics',
       tech: [
