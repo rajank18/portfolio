@@ -55,7 +55,7 @@ const About = () => {
             projects, and figuring out how tech can make life easier (or just
             more fun). Most days you’ll find me experimenting with code,
             learning something new, or following my creativity wherever it wants
-            to go. Still growing. Still building. Still curious.
+            to go.
           </p>
           <p>
              ✦ Still growing, Still building ✦ 
