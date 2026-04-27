@@ -49,7 +49,7 @@ const Hero = () => {
       className="min-h-screen flex items-center justify-center px-6"
     >
       <div className="max-w-4xl mx-auto text-center">
-        <p className="text-xl md:text-xl text-gray-600 dark:text-gray-400 font-light mb-2 md:mr-150">
+        <p className="text-xl md:text-xl text-gray-600 dark:text-gray-400 font-light mb-2 md:mr-160">
           Hey, I'm
         </p>
         <h1

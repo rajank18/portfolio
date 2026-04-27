@@ -17,6 +17,17 @@
 /* Custom variant for dark mode */
 @variant dark (&:where(.dark, .dark *));
 
+html,
+body,
+#root,
+button,
+input,
+select,
+textarea {
+  font-family: "Elms Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+
 body {
   background-color: #ffffff;
   color: #000000;
