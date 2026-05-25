@@ -122,7 +122,7 @@ const Navbar = () => {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className="relative text-[0.99rem] font-medium text-gray-600 transition-colors group cursor-pointer whitespace-nowrap hover:text-black dark:text-gray-300 dark:hover:text-white "
+                className="relative lg:text-[1rem] md:text-[1rem] font-medium text-gray-600 transition-colors group cursor-pointer whitespace-nowrap hover:text-black dark:text-gray-300 dark:hover:text-white text-[0.75rem]"
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
