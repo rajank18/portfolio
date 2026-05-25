@@ -63,7 +63,7 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="min-h-screen flex items-center justify-center px-0 mt-9 py-24 md:py-28"
+      className="min-h-screen flex items-center justify-center px-0 md:mt-9 py-24 md:py-28"
     >
       <div className="w-full max-w-[720px] mx-auto text-center">
         <p className="mb-2 inline-block whitespace-nowrap text-xl font-light text-gray-600 dark:text-gray-400 md:mr-160">
