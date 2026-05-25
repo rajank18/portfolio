@@ -42,6 +42,7 @@ function App() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <NekoCat />
+      
     
       <CustomCursor />
       <Navbar />
