@@ -36,29 +36,45 @@ const About = () => {
 
   // Fetch random XKCD
   useEffect(() => {
-    async function fetchXkcd() {
+    // Helper: try direct fetch, fall back to AllOrigins raw proxy
+    async function fetchJsonWithFallback(url) {
+      // try direct
       try {
-        setLoading(true);
-        setError(null);
+        const r = await fetch(url);
+        if (r.ok) return await r.json();
+      } catch (e) {
+        // ignore and try proxy
+      }
 
-        // latest comic
-        const latest = await fetch(
-          "https://corsproxy.io/?https://xkcd.com/info.0.json"
-        ).then((res) => res.json());
+      // fallback to api.allorigins.win/raw which returns raw content with CORS
+      const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+      const pr = await fetch(proxy);
+      if (!pr.ok) throw new Error('Proxy fetch failed');
+      return await pr.json();
+    }
 
-        const maxComic = latest.num;
+    async function fetchXkcd() {
+      setLoading(true);
+      setError(null);
+      try {
+        const latest = await fetchJsonWithFallback('https://xkcd.com/info.0.json');
+        const maxComic = (latest && latest.num) || 0;
+        if (!maxComic) throw new Error('Could not determine latest comic number');
 
-        let randomComic;
+        const MAX_TRIES = 8;
+        let data = null;
+        for (let i = 0; i < MAX_TRIES; i++) {
+          const rand = Math.floor(Math.random() * maxComic) + 1;
+          if (rand === 404) continue;
+          try {
+            data = await fetchJsonWithFallback(`https://xkcd.com/${rand}/info.0.json`);
+            if (data && data.img) break;
+          } catch (e) {
+            continue;
+          }
+        }
 
-        do {
-          randomComic =
-            Math.floor(Math.random() * maxComic) + 1;
-        } while (randomComic === 404);
-
-        // random comic
-        const data = await fetch(
-          `https://corsproxy.io/?https://xkcd.com/${randomComic}/info.0.json`
-        ).then((res) => res.json());
+        if (!data) data = latest;
 
         setMeme({
           url: data.img,
@@ -67,8 +83,8 @@ const About = () => {
           source: `https://xkcd.com/${data.num}/`,
         });
       } catch (err) {
-        console.log(err);
-        setError("Failed to load comic");
+        console.error('xkcd fetch error', err);
+        setError('Failed to load comic');
       } finally {
         setLoading(false);
       }
@@ -104,7 +120,7 @@ const About = () => {
             life easier.
           </p>
 
-          <p>✦Still growing, Still building✦</p>
+          <p>✦Still growing,Still building✦</p>
         </div>
 
         {/* Meme section */}
