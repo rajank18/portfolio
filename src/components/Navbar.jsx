@@ -105,7 +105,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={scrollToTop}
-              className="hidden md:block shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+              className=" md:block shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
               aria-label="Go to top"
             >
               <img
@@ -116,13 +116,13 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="flex items-center gap-3 md:gap-12">
+          <div className="flex items-center gap-2 md:gap-12">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className="relative text-[0.7rem] font-medium text-gray-600 transition-colors group cursor-pointer whitespace-nowrap hover:text-black dark:text-gray-300 dark:hover:text-white md:text-md"
+                className="relative text-[0.99rem] font-medium text-gray-600 transition-colors group cursor-pointer whitespace-nowrap hover:text-black dark:text-gray-300 dark:hover:text-white "
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
@@ -135,7 +135,7 @@ const Navbar = () => {
             <button
               ref={buttonRef}
               onClick={toggleTheme}
-              className="ml-1 p-1 transition-opacity hover:opacity-70 cursor-pointer md:ml-2"
+              className="ml-0 p-1 transition-opacity hover:opacity-70 cursor-pointer md:ml-2"
               aria-label="Toggle theme"
             >
           {isDark ? (
