@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
@@ -34,41 +35,29 @@ const About = () => {
     return () => ctx.revert();
   }, []);
 
-  // Fetch random XKCD
+  // Fetch random XKCD using our serverless API at /api/memes
   useEffect(() => {
-    // Helper: try direct fetch, fall back to AllOrigins raw proxy
-    async function fetchJsonWithFallback(url) {
-      // try direct
-      try {
-        const r = await fetch(url);
-        if (r.ok) return await r.json();
-      } catch (e) {
-        // ignore and try proxy
-      }
-
-      // fallback to api.allorigins.win/raw which returns raw content with CORS
-      const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-      const pr = await fetch(proxy);
-      if (!pr.ok) throw new Error('Proxy fetch failed');
-      return await pr.json();
+    async function fetchFromApi(path) {
+      const r = await fetch(path);
+      if (!r.ok) throw new Error('API fetch failed');
+      return await r.json();
     }
 
     async function fetchXkcd() {
       setLoading(true);
       setError(null);
       try {
-        const latest = await fetchJsonWithFallback('https://xkcd.com/info.0.json');
-        const maxComic = (latest && latest.num) || 0;
+        const latest = await fetchFromApi('/api/memes');
+        const maxComic = latest?.num;
         if (!maxComic) throw new Error('Could not determine latest comic number');
 
-        const MAX_TRIES = 8;
         let data = null;
-        for (let i = 0; i < MAX_TRIES; i++) {
+        for (let i = 0; i < 8; i++) {
           const rand = Math.floor(Math.random() * maxComic) + 1;
           if (rand === 404) continue;
           try {
-            data = await fetchJsonWithFallback(`https://xkcd.com/${rand}/info.0.json`);
-            if (data && data.img) break;
+            data = await fetchFromApi(`/api/memes?num=${rand}`);
+            if (data?.img) break;
           } catch (e) {
             continue;
           }
@@ -107,7 +96,7 @@ const About = () => {
 
         <div
           ref={textRef}
-          className="space-y-6 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-center"
+          className="space-y-6 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed "
         >
           <p>
             A curious mind who loves creating things
@@ -126,14 +115,14 @@ const About = () => {
         {/* Meme section */}
         <div className="mt-16  pt-10">
 
-          <h3 className="text-xl font-extrabold text-center mb-6 text-black dark:text-white">
+          <h3 className="text-xl text-center mb-6 text-black dark:text-white">
             <span>
               <button
                 onClick={() => location.reload()}
-                className="inline underline decoration-black dark:decoration-white decoration-2 underline-offset-2 "
+                className="inline underline decoration-black dark:decoration-white decoration-2 underline-offset-2 font-semibold"
               >
                 Refresh
-              </button><span className="inline">ments ☕︎</span>
+              </button><span className="inline font-semibold">ments ☕︎</span>
             </span>
           </h3>
 
