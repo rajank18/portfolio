@@ -96,7 +96,7 @@ const About = () => {
 
         <div
           ref={textRef}
-          className="space-y-6 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed "
+          className="space-y-6 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-center "
         >
           <p>
             A curious mind who loves creating things
@@ -109,20 +109,20 @@ const About = () => {
             life easier.
           </p>
 
-          <p>✦Still growing,Still building✦</p>
+          <p>✦Still growing, Still building✦</p>
         </div>
 
         {/* Meme section */}
         <div className="mt-16  pt-10">
 
-          <h3 className="text-xl text-center mb-6 text-black dark:text-white">
+          <h3 className="text-xl text-center font-semibold mb-6 text-black dark:text-white">
             <span>
               <button
                 onClick={() => location.reload()}
-                className="inline underline decoration-black dark:decoration-white decoration-2 underline-offset-2 font-semibold"
+                className="inline underline decoration-black dark:decoration-white decoration-2 underline-offset-2 font-bold "
               >
                 Refresh
-              </button><span className="inline font-semibold">ments ☕︎</span>
+              </button><span className="inline ">ments 𖡎</span>
             </span>
           </h3>
 
