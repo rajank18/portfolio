@@ -99,8 +99,8 @@ const Navbar = () => {
       {/* Fade overlay at top */}
       <div className="fixed top-0 left-0 right-0 h-44 bg-linear-to-b from-white dark:from-gray-900 via-white dark:via-gray-900 to-transparent z-40 pointer-events-none"></div>
       
-      <nav className="fixed top-6 left-0 right-0 z-50">
-        <div className="mx-auto w-full max-w-[720px] px-6 flex items-center justify-between gap-4 md:gap-8">
+      <nav className="fixed top-4 left-0 right-0 z-50 md:top-6">
+        <div className="mx-auto w-full max-w-[720px] px-3 flex items-center justify-between gap-2 md:px-6 md:gap-8">
           <div className="flex items-center gap-4">
             <button
               type="button"
@@ -116,13 +116,13 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="flex items-center gap-8 md:gap-12">
+          <div className="flex items-center gap-3 md:gap-12">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className="relative text-md md:text-md font-medium text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors group cursor-pointer whitespace-nowrap"
+                className="relative text-[0.7rem] font-medium text-gray-600 transition-colors group cursor-pointer whitespace-nowrap hover:text-black dark:text-gray-300 dark:hover:text-white md:text-md"
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
@@ -135,7 +135,7 @@ const Navbar = () => {
             <button
               ref={buttonRef}
               onClick={toggleTheme}
-              className="ml-2 p-1 transition-opacity hover:opacity-70 cursor-pointer"
+              className="ml-1 p-1 transition-opacity hover:opacity-70 cursor-pointer md:ml-2"
               aria-label="Toggle theme"
             >
           {isDark ? (
