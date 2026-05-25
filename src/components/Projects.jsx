@@ -29,7 +29,6 @@ const Projects = () => {
       tech: [
         { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
         { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-        { name: 'Neon', icon: neon },
         { name: 'Redis', icon: 'https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://redis.com&size=32' },
         { name: 'Hugging Face', icon: 'https://huggingface.co/favicon.ico' }
       ],
@@ -138,7 +137,6 @@ Match the target hue before time runs out and see how accurate your eyes really 
         { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
         { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
         { name: 'Vercel', icon: 'https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png' },
-        { name: 'Render', icon: 'https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://render.com&size=32' },
         { name: 'Railway', icon: 'https://railway.app/favicon.ico' }
         
       ],
@@ -181,7 +179,6 @@ Match the target hue before time runs out and see how accurate your eyes really 
       description: 'Full-stack web app that analyzes GitHub repositories to detect if code is "vibe-coded" or not',
       tech: [
         { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-        { name: 'Tailwind', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
         { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
         { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
         { name: 'Gemini', icon: 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://gemini.google.com&size=64' }
@@ -246,12 +243,12 @@ Match the target hue before time runs out and see how accurate your eyes really 
   }, []);
 
   return (
-    <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="max-w-6xl mx-auto w-full">
-        <h2 className="text-5xl md:text-6xl font-bold mb-10 text-center text-black dark:text-white">Projects</h2>
+    <section id="projects" className="min-h-screen flex items-center justify-center px-0 py-28 md:py-32">
+      <div className="max-w-15xl mx-auto w-full">
+        <h2 className="text-5xl md:text-6xl font-bold mb-14 text-center text-black dark:text-white">Projects</h2>
 
-        <div className="mb-12 flex justify-center px-2">
-          <div className="inline-flex items-center gap-2 rounded-full border border-black/15 dark:border-white/15 bg-white/85 dark:bg-black/55 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur-md">
+        <div className="mb-14 flex justify-center px-2">
+          <div className="inline-flex items-center gap-2 rounded-full border border-black/15 dark:border-white/15 bg-white/85 dark:bg-black/55 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur-md  ">
             {categories.map((category) => {
               const isActive = activeCategory === category.id;
               const iconSrc = category.id === 'packages' && isPackageOpened ? category.activeIcon : category.icon;
@@ -265,7 +262,7 @@ Match the target hue before time runs out and see how accurate your eyes really 
                   title={category.label}
                   whileTap={{ scale: 0.94 }}
                   whileHover={{ y: -1 }}
-                  className="relative h-10 w-16 md:h-10 md:w-16 rounded-full overflow-hidden grid place-items-center shrink-0"
+                  className="relative h-10 w-16 md:h-10 md:w-16 rounded-full overflow-hidden grid place-items-center shrink-0 cursor-crosshair"
                 >
                   {isActive && (
                     <motion.span
@@ -296,11 +293,11 @@ Match the target hue before time runs out and see how accurate your eyes really 
           </div>
         </div>
 
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-items-center transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${isSwitchingCategory ? 'opacity-0 translate-y-2 pointer-events-none' : 'opacity-100 translate-y-0'}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center items-start transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${isSwitchingCategory ? 'opacity-0 translate-y-2 pointer-events-none' : 'opacity-100 translate-y-0'}`}>
           {filteredProjects.map((project) => (
             <div
               key={project.title}
-              className="group relative w-full max-w-[360px] bg-white dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80 p-5 pb-28 hover:shadow-xl transition-all duration-300 cursor-pointer"
+              className="group relative w-full max-w-[360px] bg-white dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80 p-6 pb-32 hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
               {/* Content */}
                 <div className="z-10">
@@ -313,10 +310,10 @@ Match the target hue before time runs out and see how accurate your eyes really 
                 </p>
 
                 {/* Status badge */}
-                <div className="flex items-center gap-2 mb-4">
+                {/* <div className="flex items-center gap-2 mb-4">
                   <div className={`w-2 h-2 rounded-full ${getStatusColor(project.status)}`}></div>
                   <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">{project.status}</span>
-                </div>
+                </div> */}
 
                 {/* Technologies with logos */}
                 <div className="mb-3">

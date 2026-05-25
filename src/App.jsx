@@ -12,6 +12,7 @@ import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import NekoCat from './components/ui/cat.jsx';
 import SpotifyWidget from './components/SpotifyWidget';
+import GitHubWidget from './components/GitHubWidget';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -41,19 +42,23 @@ function App() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <NekoCat />
-      <AnimatedBackground />
+    
       <CustomCursor />
       <Navbar />
       
-      <div className="relative z-10">
+      <div className="relative z-10 mx-auto w-full max-w-[720px] px-6">
         <Hero />
         <About />
         
         {/* Spotify Widget Section */}
-        <section className="container mx-auto px-6 -mt-12 pb-12 max-w-2xl">
+        <section className="mx-auto w-full max-w-[720px] -mt-10 pb-14">
           <SpotifyWidget />
         </section>
-        
+
+        {/* <section className="mx-auto w-full max-w-[720px] pb-16">
+          <GitHubWidget />
+        </section>
+         */}
         <Skills />
         <Projects />
         <Experience />

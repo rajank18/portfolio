@@ -83,18 +83,17 @@ const Skills = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="min-h-screen flex items-center justify-center px-6 py-20">
-      {/* //1142px */}
-      <div className="max-w-240 mx-auto w-full">
-        <h2 className="text-5xl md:text-6xl font-bold mb-16 text-center text-black dark:text-white">Skills</h2>
+    <section ref={sectionRef} className="min-h-screen flex items-center justify-center px-0 py-24 md:py-28">
+      <div className="w-full max-w-[720px] mx-auto">
+        <h2 className="text-5xl md:text-6xl font-bold mb-14 text-center text-black dark:text-white">Skills</h2>
         <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {skillCategories.map((category, idx) => (
             <div 
               key={idx}
-              className="w-full border border-gray-200 dark:border-gray-700 p-5 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800"
+              className="w-full border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-300 bg-white dark:bg-gray-800"
             >
-              <h3 className="text-[1.7rem] font-semibold mb-6 text-black dark:text-white leading-tight">{category.title}</h3>
-              <div className="flex flex-wrap gap-2">
+              <h3 className="text-[1.7rem] font-semibold mb-7 text-black dark:text-white leading-tight">{category.title}</h3>
+              <div className="flex flex-wrap gap-3">
                 {category.skills.map((skill, skillIdx) => (
                   <div
                     key={skillIdx}

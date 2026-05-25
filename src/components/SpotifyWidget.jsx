@@ -59,7 +59,8 @@ const SpotifyWidget = () => {
 
   if (loading) {
     return (
-      <div className="w-full max-w-2xl mx-auto">
+      <div className="w-full max-w-2xl mx-auto -mt-60 mb-10">
+
         <div className="border border-gray-200 dark:border-gray-700 pr-6 pl-6 p-4 bg-white dark:bg-gray-800">
           <div className="flex items-center gap-4">
             <div className="shrink-0 w-20 h-20 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
@@ -76,7 +77,7 @@ const SpotifyWidget = () => {
 
   if (inactive) {
     return (
-      <div className="w-full max-w-2xl mx-auto">
+      <div className="w-full max-w-2xl mx-auto -mt-60 mb-10">
         <div className="border border-gray-200 dark:border-gray-700 pr-6 pl-6 p-4 bg-white dark:bg-gray-800">
           <div className="flex items-center gap-4">
             <div className="shrink-0 w-20 h-20 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
@@ -98,12 +99,12 @@ const SpotifyWidget = () => {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-2xl mx-auto -mt-60 mb-10">
       <a 
         href={spotifyData.songUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block border border-gray-200 dark:border-gray-700 pr-6 pl-6 p-4 bg-white dark:bg-gray-800 hover:shadow-lg transition-all duration-300 group"
+        className="block border border-gray-200 dark:border-gray-700 pr-6 pl-6 p-4  bg-white dark:bg-gray-800 hover:shadow-lg transition-all duration-300 group"
       >
         <div className="flex items-center gap-6">
           {/* Album Art */}

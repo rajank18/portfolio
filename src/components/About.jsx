@@ -32,15 +32,15 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen flex items-center justify-center px-6 pt-20 pb-12 "
+      className="min-h-screen flex items-center justify-center px-0 pb-24 md:pb-60"
     >
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold mb-12 text-center text-black dark:text-white">
+      <div className="w-full max-w-[720px] mx-auto">
+        <h2 className="text-5xl md:text-6xl font-bold mb-14 text-center text-black dark:text-white">
           About Me
         </h2>
         <div
           ref={textRef}
-          className="space-y-6 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed"
+          className="space-y-6 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-center"
         >
           {/* <p>
             I'm a passionate developer and designer who loves creating

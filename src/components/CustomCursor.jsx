@@ -53,32 +53,27 @@ const CustomCursor = () => {
   if (isMobile) return null;
 
   return (
-    <>
+    <div
+      aria-hidden
+      style={{
+        position: 'fixed',
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        transform: 'translate(-50%, -50%)',
+        pointerEvents: 'none',
+        zIndex: 99999,
+        mixBlendMode: 'exclusion',
+      }}
+    >
       <div
-        className="fixed pointer-events-none z-50 mix-blend-difference"
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        <div
-          className={`${isDark ? 'bg-white' : 'bg-white'} rounded-full transition-all duration-200 ${
-            isPointer ? 'w-12 h-12' : 'w-6 h-6'
-          }`}
-        />
+        className={`rounded-full transition-all duration-200 ${isPointer ? 'w-12 h-12' : 'w-6 h-6'}`}
+        style={{ background: 'white' }}
+      />
+
+      <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
+        <div className={`w-1 h-1 rounded-full`} style={{ background: 'white' }} />
       </div>
-      <div
-        className="fixed pointer-events-none z-50 mix-blend-difference"
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        <div className={`w-1 h-1 ${isDark ? 'bg-white' : 'bg-white'} rounded-full`} />
-      </div>
-    </>
+    </div>
   );
 };
 

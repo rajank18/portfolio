@@ -36,15 +36,15 @@ const Contact = () => {
   }, []);
 
   return (
-    <section id="contact" ref={sectionRef} className="min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="max-w-3xl mx-auto w-full text-center">
+    <section id="contact" ref={sectionRef} className="min-h-screen flex items-center justify-center px-0 py-24 md:py-28">
+      <div className="w-full max-w-[720px] mx-auto text-center">
         <div ref={contentRef}>
-          <h2 className="text-5xl md:text-6xl font-bold mb-8 text-black dark:text-white">Let's Connect</h2>
-          <p className="text-xl text-gray-700 dark:text-gray-300 mb-12">
+          <h2 className="text-5xl md:text-6xl font-bold mb-10 text-black dark:text-white">Let's Connect</h2>
+          <p className="text-xl text-gray-700 dark:text-gray-300 mb-14">
             Have a project in mind? Let's build something amazing together.
           </p>
           
-          <div className="space-y-4 mb-12">
+          <div className="space-y-4 mb-14">
             {socials.map((social, idx) => (
               <a
                 key={idx}
@@ -63,7 +63,7 @@ const Contact = () => {
             ))}
           </div>
 
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
+          <p className="text-gray-500 dark:text-gray-400 text-sm pt-2">
             Developed by ‎Rajan♡ ˎˊ˗
           </p>
         </div>

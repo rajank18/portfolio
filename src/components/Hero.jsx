@@ -1,15 +1,32 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Typewriter from "typewriter-effect";
-import TextType from "./ui/text-type.jsx";
+import { motion, AnimatePresence } from "framer-motion";
+import VariableProximity from "./ui/VariableProximity";
+
 
 gsap.registerPlugin(ScrollTrigger);
+
+const roles = [
+  "Full Stack Developer*",
+  "Flutter App Developer*",
+  "UI Designer*",
+];
 
 const Hero = () => {
   const heroRef = useRef(null);
   const nameRef = useRef(null);
   const titleRef = useRef(null);
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % roles.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,45 +63,55 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="min-h-screen flex items-center justify-center px-6"
+      className="min-h-screen flex items-center justify-center px-0 mt-9 py-24 md:py-28"
     >
-      <div className="max-w-4xl mx-auto text-center">
-        <p className="text-xl md:text-xl text-gray-600 dark:text-gray-400 font-light mb-2 md:mr-160">
+      <div className="w-full max-w-[720px] mx-auto text-center">
+        <p className="mb-2 inline-block whitespace-nowrap text-xl font-light text-gray-600 dark:text-gray-400 md:mr-160">
           Hey, I'm
         </p>
+
         <h1
           ref={nameRef}
-          className="text-6xl md:text-8xl font-bold mb-6 tracking-tight text-black dark:text-white"
+          className="text-6xl md:text-8xl font-bold mb-8 tracking-tight text-black dark:text-white"
         >
-          Rajan Kanzariya
+          Rajan Kanzariya 
         </h1>
-        <div ref={titleRef} className="space-y-4">
-          <p className="text-xl md:text-xl text-gray-600 dark:text-gray-400 font-light md:ml-110 mb-10">
-            I Build Cool Projects for Fun
+
+        <div ref={titleRef}>
+          <p className="text-xl text-gray-600 dark:text-gray-400 font-light md:ml-110 mb-10">
+            I Build Cool   Projects   for Fun
           </p>
-          <div className="text-lg md:text-xl text-gray-700 dark:text-gray-300 min-h-8">
-            {/* <Typewriter
-              options={{
-                strings: ['Full Stack Developer✱', 'Flutter App Developer✱', 'UI Designer✱'],
-                autoStart: true,
-                loop: true,
-                deleteSpeed: 50,
-                delay: 150,
-                cursor: '|',
-                cursorClassName: 'text-black dark:text-white',
-              }}
-            /> */}
-            <TextType
-              text={[
-                "Full Stack Developer*",
-                "Flutter App Developer*",
-                "UI Designer*",
-              ]}
-              // typingSpeed={70}
-              // pauseDuration={1500}
-              showCursor={true}
-              cursorCharacter="_"
-            />
+
+          <div className="h-10 overflow-hidden text-lg md:text-xl text-gray-700 dark:text-gray-300">
+
+            <AnimatePresence mode="wait">
+
+              <motion.div
+                key={roles[index]}
+                initial={{
+                  opacity: 0,
+                  filter: "blur(10px)",
+                  y: 40,
+                }}
+                animate={{
+                  opacity: 1,
+                  filter: "blur(0px)",
+                  y: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  filter: "blur(10px)",
+                  y: -20,
+                }}
+                transition={{
+                  duration: 0.6,
+                }}
+              >
+                {roles[index]}
+              </motion.div>
+
+            </AnimatePresence>
+
           </div>
         </div>
       </div>
