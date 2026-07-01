@@ -26,6 +26,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { Oneko } from 'lots-o-nekos';
 
+// Force initialization even if the system/browser has "prefers-reduced-motion" enabled
+if (typeof window !== 'undefined' && Oneko) {
+  Oneko.canInitialize = () => true;
+}
+
 const NekoCat = () => {
   const [currentCat, setCurrentCat] = useState('default');
   const usedCatsRef = useRef(new Set());
@@ -106,7 +111,7 @@ const NekoCat = () => {
       catInstance = new Oneko({
         nekoSize: 32,
         nekoSpeed: 10,
-        source: `https://raw.githubusercontent.com/raynecloudy/oneko_db/refs/heads/master/${currentCat}.png`,
+        source: `https://raw.githubusercontent.com/raynepaws/oneko_db/refs/heads/master/${currentCat}.png`,
       });
       
       // Track mouse movement and update cat's target
