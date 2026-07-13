@@ -10,7 +10,7 @@ const Contact = () => {
 
   const socials = [
     { name: 'GitHub', url: 'https://github.com/rajank18', icon: '→' },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/rajan-kanzariya-2a9899248/', icon: '→' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/rajan-kanzariya/', icon: '→' },
     { name: 'Twitter', url: 'https://twitter.com/KanzariyaRajan', icon: '→' },
     { name: 'Email', url: 'mailto:rajankanzariya1806@gmail.com', icon: '→' },
   ];
