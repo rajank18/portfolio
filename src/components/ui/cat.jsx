@@ -111,7 +111,7 @@ const NekoCat = () => {
       catInstance = new Oneko({
         nekoSize: 32,
         nekoSpeed: 10,
-        source: `https://raw.githubusercontent.com/raynepaws/oneko_db/refs/heads/master/${currentCat}.png`,
+        source: `https://raw.githubusercontent.com/raynecloudy/oneko_db/refs/heads/master/${currentCat}.png`,
       });
       
       // Track mouse movement and update cat's target
