@@ -55,16 +55,6 @@ const Hero = () => {
         ease: "power3.out",
       });
 
-      gsap.to(heroRef.current, {
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
-        opacity: 0.3,
-        y: -100,
-      });
     }, heroRef);
 
     return () => ctx.revert();
