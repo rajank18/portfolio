@@ -73,7 +73,7 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="flex items-center justify-center px-0 pt-18 pb-8 md:pt-42 md:pb-10"
+      className="flex items-center justify-center px-0 pt-36 pb-8 md:pt-42 md:pb-10"
     >
       <div className="w-full max-w-[720px] mx-auto text-center">
         {/* Auto loop media section */}
