@@ -7,7 +7,7 @@
 //       nekoSize: 32,
 //       nekoSpeed: 10,
 //     });
-    
+
 //     cat.start();
 
 //     return () => {
@@ -34,12 +34,12 @@ if (typeof window !== 'undefined' && Oneko) {
 const NekoCat = () => {
   const [currentCat, setCurrentCat] = useState('default');
   const usedCatsRef = useRef(new Set());
-  
+
   // All available cat types
   const allCats = [
-    "ace", "black", "bunny", "calico", "default", "eevee", 
-    "esmeralda", "fox", "ghost", "gray", "jess", "kina", 
-    "lucy", "maia", "maria", "mike", "silver", "silversky", 
+    "ace", "black", "bunny", "calico", "default", "eevee",
+    "esmeralda", "fox", "ghost", "gray", "jess", "kina",
+    "lucy", "maia", "maria", "mike", "silver", "silversky",
     "snuupy", "spirit", "tora", "valentine"
   ];
 
@@ -50,17 +50,17 @@ const NekoCat = () => {
       usedCatsRef.current.clear();
       console.log("All cats used, restarting cycle!");
     }
-    
+
     // Get available cats (not yet used)
     const availableCats = allCats.filter(cat => !usedCatsRef.current.has(cat));
-    
+
     // Pick a random cat from available ones
     const randomIndex = Math.floor(Math.random() * availableCats.length);
     const selectedCat = availableCats[randomIndex];
-    
+
     // Mark this cat as used
     usedCatsRef.current.add(selectedCat);
-    
+
     console.log(`Selected cat: ${selectedCat}, Used: ${usedCatsRef.current.size}/${allCats.length}`);
     return selectedCat;
   };
@@ -74,16 +74,16 @@ const NekoCat = () => {
   const getTimeUntilNext6AM = () => {
     const now = new Date();
     const istTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-    
+
     // Set next 6 AM
     const next6AM = new Date(istTime);
     next6AM.setHours(6, 0, 0, 0);
-    
+
     // If it's already past 6 AM today, set for tomorrow
     if (istTime >= next6AM) {
       next6AM.setDate(next6AM.getDate() + 1);
     }
-    
+
     return next6AM - istTime;
   };
 
@@ -93,11 +93,11 @@ const NekoCat = () => {
     const now = new Date();
     const istTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
     const dayOfYear = Math.floor((istTime - new Date(istTime.getFullYear(), 0, 0)) / 86400000);
-    
+
     // Calculate which cat should be shown today
     const cyclePosition = dayOfYear % allCats.length;
     const todaysCat = allCats[cyclePosition];
-    
+
     setCurrentCat(todaysCat);
     console.log(`Today's cat (Day ${dayOfYear}): ${todaysCat} at IST: ${getIndianTime()}`);
   }, []);
@@ -105,7 +105,7 @@ const NekoCat = () => {
   useEffect(() => {
     let catInstance = null;
     let rotationTimeout = null;
-    
+
     try {
       // Initialize with local oneko.gif sprite from public folder
       catInstance = new Oneko({
@@ -113,14 +113,14 @@ const NekoCat = () => {
         nekoSpeed: 10,
         source: "/oneko.gif",
       });
-      
+
       // Track mouse movement and update cat's target
       const handleMouseMove = (event) => {
         if (catInstance) {
           catInstance.setTarget(event.clientX, event.clientY);
         }
       };
-      
+
       // Track touch movement for mobile devices
       const handleTouchMove = (event) => {
         if (catInstance && event.touches.length > 0) {
@@ -128,7 +128,7 @@ const NekoCat = () => {
           catInstance.setTarget(touch.clientX, touch.clientY);
         }
       };
-      
+
       // Track touch start for mobile devices (when user taps)
       const handleTouchStart = (event) => {
         if (catInstance && event.touches.length > 0) {
@@ -136,20 +136,20 @@ const NekoCat = () => {
           catInstance.setTarget(touch.clientX, touch.clientY);
         }
       };
-      
+
       // Add event listener for mouse movement only
       document.addEventListener('mousemove', handleMouseMove);
-      
+
       // Schedule next cat change at 6 AM IST
       const timeUntil6AM = getTimeUntilNext6AM();
 
-      
+
       rotationTimeout = setTimeout(() => {
         const nextCat = getNextCat();
         setCurrentCat(nextCat);
-      
+
       }, timeUntil6AM);
-      
+
       // Cleanup function
       return () => {
         clearTimeout(rotationTimeout);
@@ -166,7 +166,7 @@ const NekoCat = () => {
     }
   }, [currentCat]); // Re-run when cat changes
 
-  return null; 
+  return null;
 };
 
 export default NekoCat;
