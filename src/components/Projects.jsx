@@ -243,11 +243,11 @@ Match the target hue before time runs out and see how accurate your eyes really 
   }, []);
 
   return (
-    <section id="projects" className="min-h-screen flex items-center justify-center px-0 py-28 md:py-32">
+    <section id="projects" className="flex items-center justify-center px-0 py-8 md:py-12">
       <div className="max-w-15xl mx-auto w-full">
-        <h2 className="text-5xl md:text-6xl font-bold mb-14 text-center text-black dark:text-white">Projects</h2>
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-center text-black dark:text-white">Projects</h2>
 
-        <div className="mb-14 flex justify-center px-2">
+        <div className="mb-6 flex justify-center px-2">
           <div className="inline-flex items-center gap-2 rounded-full border border-black/15 dark:border-white/15 bg-white/85 dark:bg-black/55 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur-md  ">
             {categories.map((category) => {
               const isActive = activeCategory === category.id;

@@ -40,7 +40,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen">
       <NekoCat />
       
     
@@ -52,7 +52,7 @@ function App() {
         <About />
         
         {/* Spotify Widget Section */}
-        <section className="mx-auto w-full max-w-[720px] -mt-10 pb-14">
+        <section className="mx-auto w-full max-w-[720px] pb-6">
           <SpotifyWidget />
         </section>
 

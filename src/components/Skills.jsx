@@ -83,9 +83,9 @@ const Skills = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="min-h-screen flex items-center justify-center px-0 py-24 md:py-28">
+    <section ref={sectionRef} className="flex items-center justify-center px-0 py-8 md:py-12">
       <div className="w-full max-w-[720px] mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold mb-14 text-center text-black dark:text-white">Skills</h2>
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-center text-black dark:text-white">Skills</h2>
         <div ref={skillsRef} className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {skillCategories.map((category, idx) => (
             <div 

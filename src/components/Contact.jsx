@@ -16,16 +16,20 @@ const Contact = () => {
   ];
 
   useEffect(() => {
+    if (!contentRef.current || !sectionRef.current) return;
+
     const ctx = gsap.context(() => {
+      gsap.set(contentRef.current.children, { opacity: 1, y: 0 });
+
       gsap.from(contentRef.current.children, {
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 70%',
-          end: 'bottom 20%',
-          toggleActions: 'play none none reverse',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          once: true,
         },
         opacity: 0,
-        y: 50,
+        y: 40,
         stagger: 0.1,
         duration: 0.8,
         ease: 'power3.out',
@@ -36,15 +40,15 @@ const Contact = () => {
   }, []);
 
   return (
-    <section id="contact" ref={sectionRef} className="min-h-screen flex items-center justify-center px-0 py-24 md:py-28">
+    <section id="contact" ref={sectionRef} className="flex items-center justify-center px-0 py-8 md:py-12">
       <div className="w-full max-w-[720px] mx-auto text-center">
         <div ref={contentRef}>
-          <h2 className="text-5xl md:text-6xl font-bold mb-10 text-black dark:text-white">Let's Connect</h2>
-          <p className="text-xl text-gray-700 dark:text-gray-300 mb-14">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4 text-black dark:text-white">Let's Connect</h2>
+          <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
             Have a project in mind? Let's build something amazing together.
           </p>
           
-          <div className="space-y-4 mb-14">
+          <div className="space-y-4 mb-6">
             {socials.map((social, idx) => (
               <a
                 key={idx}

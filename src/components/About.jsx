@@ -16,16 +16,20 @@ const About = () => {
 
   // GSAP Animation
   useEffect(() => {
+    if (!textRef.current || !sectionRef.current) return;
+
     const ctx = gsap.context(() => {
+      gsap.set(textRef.current.children, { opacity: 1, y: 0 });
+
       gsap.from(textRef.current.children, {
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          start: "top 85%",
+          toggleActions: "play none none none",
+          once: true,
         },
         opacity: 0,
-        y: 50,
+        y: 40,
         stagger: 0.2,
         duration: 1,
         ease: "power3.out",
@@ -86,11 +90,11 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen flex items-center justify-center px-4 pb-24 md:pb-60"
+      className="flex items-center justify-center px-4 py-8 md:py-12"
     >
       <div className="w-full max-w-[720px] mx-auto">
 
-        <h2 className="text-5xl md:text-6xl font-bold mb-14 text-center text-black dark:text-white">
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-center text-black dark:text-white">
           About Me
         </h2>
 
@@ -113,7 +117,7 @@ const About = () => {
         </div>
 
         {/* Meme section */}
-        <div className="mt-16  pt-10">
+        <div className="mt-8 pt-4">
 
           <h3 className="text-xl text-center font-semibold mb-6 text-black dark:text-white">
             <span>

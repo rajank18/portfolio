@@ -107,11 +107,11 @@ const NekoCat = () => {
     let rotationTimeout = null;
     
     try {
-      // Initialize with current cat
+      // Initialize with local oneko.gif sprite from public folder
       catInstance = new Oneko({
         nekoSize: 32,
         nekoSpeed: 10,
-        source: `https://raw.githubusercontent.com/raynepaws/oneko_db/refs/heads/master/${currentCat}.png`,
+        source: "/oneko.gif",
       });
       
       // Track mouse movement and update cat's target
@@ -137,10 +137,8 @@ const NekoCat = () => {
         }
       };
       
-      // Add event listeners for both mouse and touch
+      // Add event listener for mouse movement only
       document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('touchmove', handleTouchMove, { passive: true });
-      document.addEventListener('touchstart', handleTouchStart, { passive: true });
       
       // Schedule next cat change at 6 AM IST
       const timeUntil6AM = getTimeUntilNext6AM();
@@ -156,8 +154,6 @@ const NekoCat = () => {
       return () => {
         clearTimeout(rotationTimeout);
         document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('touchmove', handleTouchMove);
-        document.removeEventListener('touchstart', handleTouchStart);
         if (catInstance && catInstance.isInitialized()) {
           catInstance.loopAnimating = false;
           if (catInstance.element && catInstance.element.parentNode) {

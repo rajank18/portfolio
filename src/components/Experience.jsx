@@ -25,16 +25,21 @@ const Experience = () => {
   ];
 
   useEffect(() => {
+    if (!timelineRef.current || !sectionRef.current) return;
+
     const ctx = gsap.context(() => {
+      // Ensure initial visible state fallback
+      gsap.set(timelineRef.current.children, { opacity: 1, x: 0 });
+
       gsap.from(timelineRef.current.children, {
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 70%',
-          end: 'bottom 20%',
-          toggleActions: 'play none none reverse',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          once: true,
         },
         opacity: 0,
-        x: -100,
+        x: -50,
         stagger: 0.2,
         duration: 0.8,
         ease: 'power3.out',
@@ -45,9 +50,9 @@ const Experience = () => {
   }, []);
 
   return (
-    <section id="experience" ref={sectionRef} className="min-h-screen flex items-center justify-center px-0 py-24 md:py-28">
+    <section id="experience" ref={sectionRef} className="flex items-center justify-center px-0 py-8 md:py-12">
       <div className="w-full max-w-[720px] mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold mb-14 text-center text-black dark:text-white">Experience</h2>
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-center text-black dark:text-white">Experience</h2>
         <div ref={timelineRef} className="space-y-10">
           {experiences.map((exp, idx) => (
             <div 

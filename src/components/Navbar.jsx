@@ -35,7 +35,7 @@ const Navbar = () => {
 
   const toggleTheme = (e) => {
     if (isAnimating) return;
-    
+
     const button = buttonRef.current;
     const rect = button.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
@@ -62,9 +62,9 @@ const Navbar = () => {
     circle.style.zIndex = '9999';
     circle.style.pointerEvents = 'none';
     circle.style.transition = 'all 0.8s ease-out';
-    
+
     document.body.appendChild(circle);
-    
+
     setIsAnimating(true);
 
     // Trigger animation
@@ -98,7 +98,7 @@ const Navbar = () => {
     <>
       {/* Fade overlay at top */}
       <div className="fixed top-0 left-0 right-0 h-44 bg-linear-to-b from-white dark:from-gray-900 via-white dark:via-gray-900 to-transparent z-40 pointer-events-none"></div>
-      
+
       <nav className="fixed top-4 left-0 right-0 z-50 md:top-6">
         <div className="mx-auto w-full max-w-[720px] px-3 flex items-center justify-between gap-2 md:px-6 md:gap-8">
           <div className="flex items-center gap-4">
@@ -135,41 +135,41 @@ const Navbar = () => {
             <button
               ref={buttonRef}
               onClick={toggleTheme}
-              className="ml-0 p-1 transition-opacity hover:opacity-70 cursor-pointer md:ml-2"
+              className="ml-0 p-1  border-2 border-gray-300 dark:border-gray-200 rounded-full transition-opacity hover:opacity-70 cursor-pointer md:ml-2"
               aria-label="Toggle theme"
             >
-          {isDark ? (
-            // Sun icon
-            <svg
-              className="w-5 h-5 text-gray-900 dark:text-gray-100"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-              />
-            </svg>
-          ) : (
-            // Moon icon
-            <svg
-              className="w-5 h-5 text-gray-900 dark:text-gray-100"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-              />
-            </svg>
-          )}
-        </button>
+              {isDark ? (
+                // Sun icon
+                <svg
+                  className="w-5 h-5 text-gray-900 dark:text-gray-100"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              ) : (
+                // Moon icon
+                <svg
+                  className="w-5 h-5 text-gray-900 dark:text-gray-100"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
       </nav>
