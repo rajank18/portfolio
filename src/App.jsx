@@ -21,10 +21,26 @@ function App() {
   useEffect(() => {
     // Force light mode on initial load
     document.documentElement.classList.remove('dark');
+    
+    // Smooth scroll
+    const lenis = {
+      update: (time) => {
+        gsap.ticker.add((time) => {
+          ScrollTrigger.update();
+        });
+      }
+    };
+
+    gsap.ticker.add(lenis.update);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(lenis.update);
+    };
   }, []);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen overflow-x-hidden">
       <NekoCat />
       
     
