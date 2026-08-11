@@ -23,6 +23,36 @@ const Projects = () => {
 
   const projects = [
     {
+     title: 'SpeakDB',
+
+     category: 'web',
+
+     description: `SpeakDB is an AI-powered desktop database assistant. Connect your database, ask questions in natural language, generate SQL, explore schemas, and safely query your data.`,
+
+     tech: [
+       {
+         name: 'Electron',
+         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg'
+        },
+       {
+         name: 'React',
+         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
+        },
+        {
+         name: 'TypeScript',
+         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg'
+        },
+        {
+         name: 'OpenRouter',
+         icon: 'https://openrouter.ai/favicon.ico'
+        }
+     ],
+
+     status: 'Developed',
+     githubUrl: 'https://github.com/rajank18/SpeakDB/',
+     liveUrl: 'https://speakdb.vercel.app/'
+},
+    {
       title: 'StudioX',
       category: 'web',
       description: 'A Free AI-powered video editing platform for creators, with tools like AI subtitles, video summaries, reel cutter, compression, and enhancement any many more features in one place.',
