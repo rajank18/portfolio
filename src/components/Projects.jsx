@@ -203,20 +203,20 @@ Match the target hue before time runs out and see how accurate your eyes really 
       githubUrl: 'https://github.com/rajank18/DevScout',
       liveUrl: 'https://dev-scout-hazel.vercel.app/'
     },
-    {
-      title: 'LOL VibeCoder',
-      category: 'web',
-      description: 'Full-stack web app that analyzes GitHub repositories to detect if code is "vibe-coded" or not',
-      tech: [
-        { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-        { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-        { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-        { name: 'Gemini', icon: 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://gemini.google.com&size=64' }
-      ],
-      status: 'Developed',
-      githubUrl: 'https://github.com/rajank18/LOL-VibeCoder/tree/master',
-      liveUrl: ''
-    },
+    // {
+    //   title: 'LOL VibeCoder',
+    //   category: 'web',
+    //   description: 'Full-stack web app that analyzes GitHub repositories to detect if code is "vibe-coded" or not',
+    //   tech: [
+    //     { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+    //     { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+    //     { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+    //     { name: 'Gemini', icon: 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://gemini.google.com&size=64' }
+    //   ],
+    //   status: 'Developed',
+    //   githubUrl: 'https://github.com/rajank18/LOL-VibeCoder/tree/master',
+    //   liveUrl: ''
+    // },
     
   ];
 
