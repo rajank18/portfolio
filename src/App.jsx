@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     // Force light mode on initial load
     document.documentElement.classList.remove('dark');
-    
+
     // Smooth scroll
     const lenis = {
       update: (time) => {
@@ -42,24 +42,22 @@ function App() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <NekoCat />
-      
-    
+
+
       <CustomCursor />
       <Navbar />
-      
+
       <div className="relative z-10 mx-auto w-full max-w-[720px] px-6">
         <Hero />
         <About />
-        
+
+        {/* GitHub Contribution Graph
+        <GitHubWidget /> */}
+
         {/* Spotify Widget Section */}
         <section className="mx-auto w-full max-w-[720px] pb-6">
           <SpotifyWidget />
         </section>
-
-        {/* <section className="mx-auto w-full max-w-[720px] pb-16">
-          <GitHubWidget />
-        </section>
-         */}
         <Skills />
         <Projects />
         <Experience />

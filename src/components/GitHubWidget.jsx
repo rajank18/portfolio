@@ -1,198 +1,161 @@
-import { useEffect, useMemo, useRef } from 'react';
-import 'activity-grid';
+import { useState, useEffect, useRef } from 'react';
+import { GitHubContributionGraph } from 'github-contrib-graph/react';
+import 'github-contrib-graph/styles.css';
 
-const months = ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
-
-const hashDate = (date) => {
-  const text = date.toISOString().slice(0, 10);
-  let hash = 0;
-
-  for (let index = 0; index < text.length; index += 1) {
-    hash = (hash * 31 + text.charCodeAt(index)) % 2147483647;
-  }
-
-  return hash / 2147483647;
+const lightTheme = {
+  bgColor: 'transparent',
+  textColor: '#6b7280',
+  inactiveTextColor: '#6b7280',
+  cellLevel0: '#e9e9e9ff',  //none
+  cellLevel1: '#b6b6b6ff',  //lowest
+  cellLevel2: '#989898ff',  //low cont
+  cellLevel3: '#4e4e4eff',  //mid cont
+  cellLevel4: '#2c2c2cff',  //high cont
+  cellBorderColor: 'rgba(0, 0, 0, 0.06)',
+  cellOutlineColor: 'transparent',
+  borderColor: 'transparent',
+  cellSize: '8.5px',
+  cellGap: '2.5px',
+  cellRadius: '2px',
 };
 
-const toLocalDateString = (date) => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-
-  return `${year}-${month}-${day}`;
-};
-
-const getBurstWeight = (date) => {
-  const month = date.getMonth();
-
-  if (month === 7 || month === 8) return 1.05;
-  if (month === 10 || month === 11) return 1.15;
-  if (month === 1 || month === 2) return 1.1;
-  if (month === 3 || month === 4) return 0.95;
-  return 0.7;
-};
-
-const getClusterWeight = (date) => {
-  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
-  const clusters = [120, 185, 250, 320, 365];
-
-  return clusters.reduce((weight, center) => {
-    const distance = Math.abs(dayOfYear - center);
-    const pulse = Math.max(0, 1 - distance / 18);
-
-    return weight + pulse * 0.85;
-  }, 0.15);
-};
-
-const createActivityData = () => {
-  const data = [];
-  const endDate = new Date();
-  const startDate = new Date(endDate);
-  startDate.setFullYear(endDate.getFullYear() - 1);
-
-  for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
-    const isoDate = toLocalDateString(date);
-    const weekdayBias = [0.35, 0.7, 0.95, 1, 0.9, 0.55, 0.25][date.getDay()];
-    const random = hashDate(date);
-    const intensity = getBurstWeight(date) * getClusterWeight(date) * weekdayBias;
-    const score = intensity * 1.15 + random * 0.45;
-    const count = score < 0.7 ? 0 : score < 1.05 ? 1 : score < 1.45 ? 2 : score < 1.9 ? 3 : 4;
-
-    data.push({
-      date: isoDate,
-      count,
-    });
-  }
-
-  return data;
+const darkTheme = {
+  bgColor: 'transparent',
+  textColor: '#9ca3af',
+  inactiveTextColor: '#9ca3af',
+  cellLevel0: '#2c2c2cff',  //none
+  cellLevel1: '#4e4e4eff',  //lowest
+  cellLevel2: '#989898ff',  //low cont
+  cellLevel3: '#b6b6b6ff',  //mid cont
+  cellLevel4: '#e9e9e9ff',  //high cont
+  cellBorderColor: 'rgba(255, 255, 255, 0.05)',
+  cellOutlineColor: 'transparent',
+  borderColor: 'transparent',
+  cellSize: '8.5px',
+  cellGap: '2.5px',
+  cellRadius: '2px',
 };
 
 const GitHubWidget = () => {
-  const gridRef = useRef(null);
-  const activityData = useMemo(() => createActivityData(), []);
+  const [isDark, setIsDark] = useState(false);
+  const containerRef = useRef(null);
   const username = 'rajank18';
 
   useEffect(() => {
-    const grid = gridRef.current;
-
-    if (!grid) return;
-
-    const applyTheme = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      const startDate = new Date();
-      startDate.setFullYear(startDate.getFullYear() - 1);
-      const startDateString = toLocalDateString(startDate);
-      const endDateString = toLocalDateString(new Date());
-
-      // Try to load real GitHub contribution levels for the public user.
-      const mapLevelsToCounts = (level) => {
-        // GitHub exposes level 0..4; map to approximate counts for visual parity
-        switch (Number(level)) {
-          case 0:
-            return 0;
-          case 1:
-            return 1;
-          case 2:
-            return 3;
-          case 3:
-            return 6;
-          case 4:
-            return 10;
-          default:
-            return 0;
-        }
-      };
-
-      const tryFetchGitHubContributions = async () => {
-        try {
-          const url = `https://github.com/users/${username}/contributions?from=${startDateString}&to=${endDateString}`;
-          const res = await fetch(url, { credentials: 'omit' });
-
-          if (!res.ok) throw new Error('Failed to fetch');
-
-          const text = await res.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(text, 'text/html');
-          const cells = Array.from(doc.querySelectorAll('td.ContributionCalendar-day'));
-
-          if (!cells.length) throw new Error('No cells found');
-
-          const parsed = cells
-            .map((n) => ({ date: n.getAttribute('data-date'), level: n.getAttribute('data-level') }))
-            .filter((x) => x.date)
-            .map((x) => ({ date: x.date, count: mapLevelsToCounts(x.level) }));
-
-          if (parsed.length) {
-            grid.data = parsed;
-            grid.startDate = startDateString;
-            grid.endDate = endDateString;
-            return true;
-          }
-        } catch (err) {
-          // Fetch could be blocked by CORS or network; fall back to generated data
-          // console.warn('GitHub fetch failed', err);
-        }
-
-        return false;
-      };
-
-      // Attempt to fetch GitHub contributions; fall back to generated activity data
-      tryFetchGitHubContributions().then((ok) => {
-        if (!ok) grid.data = activityData;
-      });
-      grid.colors = isDark
-        ? ['#1f2937', '#374151', '#4b5563', '#6b7280', '#d1d5db']
-        : ['#e5e7eb', '#d1d5db', '#9ca3af', '#6b7280', '#4b5563'];
-      grid.emptyColor = isDark ? '#111827' : '#ffffff';
-      grid.darkMode = isDark;
-      grid.startWeekOnMonday = true;
-      grid.skipWeekends = false;
-      // start/end dates are set after fetch or fallback
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
     };
 
-    applyTheme();
+    checkTheme();
 
-    const observer = new MutationObserver(applyTheme);
+    const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class'],
     });
 
     return () => observer.disconnect();
-  }, [activityData]);
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let timeoutId;
+    const handleTouch = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        if (document.activeElement && container.contains(document.activeElement)) {
+          document.activeElement.blur();
+        }
+      }, 2500);
+    };
+
+    container.addEventListener('touchend', handleTouch, { passive: true });
+    container.addEventListener('click', handleTouch, { passive: true });
+
+    return () => {
+      clearTimeout(timeoutId);
+      container.removeEventListener('touchend', handleTouch);
+      container.removeEventListener('click', handleTouch);
+    };
+  }, []);
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <div className=" md:px-6 md:py-6">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 mb-2">GitHub</p>
-            <h3 className="text-2xl md:text-3xl font-bold text-black dark:text-white">Contribution Graph</h3>
-          </div>
-          <span className="text-xs uppercase tracking-[0.25em] text-gray-400 dark:text-gray-500">2025-26</span>
-        </div>
-
-        <div className="overflow-x-auto pb-1">
-          <div className="min-w-[760px]">
-            <div className="grid grid-cols-12 gap-2.5 px-1 mb-4 text-[11px] uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">
-              {months.map((month) => (
-                <span key={month}>{month}</span>
-              ))}
-            </div>
-
-            <activity-grid
-              ref={gridRef}
-              className="block w-full"
-              style={{
-                '--activity-grid-cell-size': '11px',
-                '--activity-grid-cell-gap': '4px',
-                '--activity-grid-border-radius': '2px',
-              }}
-            />
-          </div>
+    <section className="w-full max-w-[720px] mx-auto py-4 md:py-6 mt-4 md:mt-6">
+      <style>{`
+        .ghCalendarHeader a {
+          color: inherit !important;
+        }
+        .ghCalendarHeader a:hover {
+          opacity: 0.8;
+        }
+        .ghCalendarDayCell .ghCalendarTooltip {
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.25s ease, visibility 0.25s ease;
+          pointer-events: none !important;
+        }
+        .ghCalendarDayCell:hover .ghCalendarTooltip,
+        .ghCalendarDayCell:active .ghCalendarTooltip,
+        .ghCalendarDayCell:focus .ghCalendarTooltip {
+          animation: ghTooltipAutoFade 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes ghTooltipAutoFade {
+          0% {
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -120%) scale(0.95);
+          }
+          10% {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -130%) scale(1);
+          }
+          75% {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -130%) scale(1);
+          }
+          100% {
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -130%) scale(0.98);
+          }
+        }
+        @media (max-width: 767px) {
+          .ghCalendarHeader,
+          .ghCalendarHeader span,
+          .ghCalendarHeader a,
+          .ghCalendarCardFooter,
+          .ghCalendarCardFooter span {
+            font-size: 11px !important;
+          }
+          .ghCalendarLabel {
+            font-size: 10px !important;
+          }
+          .ghCalendarHeader img,
+          .ghCalendarHeader svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+        }
+      `}</style>
+      <div
+        ref={containerRef}
+        className="w-auto overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 scrollbar-none"
+      >
+        <div className="min-w-[620px] md:min-w-0 w-max md:w-full flex justify-start md:justify-center bg-transparent transition-all duration-300 [&_.ghCalendarCard]:!bg-transparent [&_.ghCalendarCard]:!border-none [&_.ghCalendarCard]:!shadow-none [&_.ghCalendarCard]:!p-0 [&_.ghCalendarCardFooter]:!p-0 [&_.ghContributionGraph]:!bg-transparent [&_.ghCalendarCanvas]:!m-0 [&_.ghCalendarCanvas]:!p-0">
+          <GitHubContributionGraph
+            username={username}
+            theme={isDark ? darkTheme : lightTheme}
+            showHeader={true}
+            showFooter={true}
+            showThumbnail={false}
+          />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

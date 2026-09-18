@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import GitHubWidget from "./GitHubWidget";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -90,7 +91,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="flex items-center justify-center px-4 py-8 md:py-12"
+      className="flex items-center justify-center py-8 md:py-12"
     >
       <div className="w-full max-w-[720px] mx-auto">
 
@@ -100,21 +101,21 @@ const About = () => {
 
         <div
           ref={textRef}
-          className="space-y-6 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-center "
+          className="space-y-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-left w-full"
         >
           <p>
-            A curious mind who loves creating things
-            that feel smooth, simple, and a little magical.
+            A curious mind who loves creating things that feel smooth, simple, and a little magical.
           </p>
 
           <p>
-            I enjoy exploring new ideas, building cool
-            projects, and figuring out how tech can make
-            life easier.
+            I enjoy exploring new ideas, building cool projects, and figuring out how tech can make life easier.
           </p>
 
           <p>✦Still growing, Still building✦</p>
         </div>
+
+        {/* GitHub Contribution Graph */}
+        <GitHubWidget />
 
         {/* Meme section */}
         <div className="mt-8 pt-4">

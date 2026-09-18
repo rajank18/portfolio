@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import desktopIcon from '../assets/desktop-svgrepo-com.svg';
 import boxPackedIcon from '../assets/box-packed-svgrepo-com.svg';
 import boxUnpackedIcon from '../assets/box-unpacked-svgrepo-com.svg';
 import mobileIcon from '../assets/mobile-svgrepo-com.svg';
+import toffeeIcon from '../assets/toffee-svgrepo-com.svg';
 import neon from '../assets/neon.jpeg';
 import rightArrowIcon from '../assets/right-arrow-next-svgrepo-com.svg';
+import candy from '../assets/candy (1).svg';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('web');
+  const [funIndex, setFunIndex] = useState(0);
   const [isSwitchingCategory, setIsSwitchingCategory] = useState(false);
   const switchTimerRef = useRef(null);
 
@@ -16,12 +19,30 @@ const Projects = () => {
     { id: 'web', label: 'Web', icon: desktopIcon },
     { id: 'mobile', label: 'Mobile', icon: mobileIcon },
     { id: 'packages', label: 'Packages', icon: boxPackedIcon, activeIcon: boxUnpackedIcon },
+    { id: 'fun', label: 'Fun & Interactive', icon: candy },
   ];
 
-//   StudioX is an AI-powered video editing platform for creators, with tools like AI subtitles, video summaries, reel cutter, compression, and enhancement in one place.
-// Built with React, Node.js, and Prisma, it combines fast processing with a clean workflow for everyday content production.
+  //   StudioX is an AI-powered video editing platform for creators, with tools like AI subtitles, video summaries, reel cutter, compression, and enhancement in one place.
+  // Built with React, Node.js, and Prisma, it combines fast processing with a clean workflow for everyday content production.
 
   const projects = [
+
+    {
+      title: 'PARAMETAL',
+      category: 'web',
+      description: `Universal browser-based 3D model viewer and parametric CAD studio.
+Inspect geometry, apply skins, resize dimensions, and export 3D files in real-time.`,
+      tech: [
+        { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+        { name: 'Three.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg' },
+        { name: 'RTF', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+        { name: 'Framer Motion', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framermotion/framermotion-original.svg' },
+      ],
+      status: 'Developed',
+      githubUrl: 'https://github.com/rajank18/Parametal',
+      liveUrl: 'https://parametal.vercel.app/'
+    },
+
     {
       title: 'StudioX',
       category: 'web',
@@ -58,16 +79,15 @@ Upload resume, company name and JD, generate instantly.`,
         { name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
         { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
         { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
-        
+
       ],
       status: 'Developed',
       githubUrl: 'https://github.com/rajank18/EasyCV',
     },
     {
       title: 'Hue Did It',
-      category: 'web',
-      description: `Hue Did It is a fast, addictive color memory game.
-Match the target hue before time runs out and see how accurate your eyes really are.`,
+      category: 'fun',
+      description: `Hue Did It is a fast, addictive color memory game. Match the target hue before time runs out and see how accurate your eyes really are.`,
       tech: [
         { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
         { name: 'Framer Motion', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framermotion/framermotion-original.svg' },
@@ -76,6 +96,21 @@ Match the target hue before time runs out and see how accurate your eyes really 
       status: 'Developed',
       githubUrl: 'https://github.com/rajank18/HueDidIt',
       liveUrl: 'https://huedidit.vercel.app/'
+    },
+    {
+      title: 'Dizzywave',
+      category: 'fun',
+      description: `dizzywave is an interactive freehand visual sound canvas where geometry becomes music. Turn your drawings into polyphonic synth melodies, ambient soundscapes, and audio patterns in real time.`,
+      tech: [
+        { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+        { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+        { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+        { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
+        { name: 'Vercel', icon: 'https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png' }
+      ],
+      status: 'Developed',
+      githubUrl: 'https://github.com/rajank18/dizzywave',
+      liveUrl: 'https://dizzywave.cc.cd/'
     },
     {
       title: 'ScanX Toolkit',
@@ -102,7 +137,7 @@ Match the target hue before time runs out and see how accurate your eyes really 
       ],
       status: 'Developed',
       githubUrl: 'https://npmjs.com/package/commit_with_ai',
-      
+
     },
     {
       title: 'Voice CLI',
@@ -111,7 +146,7 @@ Match the target hue before time runs out and see how accurate your eyes really 
       tech: [
         { name: 'NPM', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg' },
         { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-        
+
       ],
       status: 'Developed',
       githubUrl: 'https://npmjs.com/package/voice-cli',
@@ -123,7 +158,7 @@ Match the target hue before time runs out and see how accurate your eyes really 
       tech: [
         { name: 'NPM', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg' },
         { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-        
+
       ],
       status: 'Developed',
       githubUrl: 'https://www.npmjs.com/package/env-safe-gaurd',
@@ -138,7 +173,7 @@ Match the target hue before time runs out and see how accurate your eyes really 
         { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
         { name: 'Vercel', icon: 'https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png' },
         { name: 'Railway', icon: 'https://railway.app/favicon.ico' }
-        
+
       ],
       status: 'Developed',
       githubUrl: 'https://github.com/rajank18/SGP_S5/tree/rajan',
@@ -153,11 +188,11 @@ Match the target hue before time runs out and see how accurate your eyes really 
         { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
         { name: 'Supabase', icon: 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://supabase.com&size=32' },
         { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
-        
+
       ],
       status: 'Developed',
       githubUrl: 'https://github.com/rajank18/SGP_S4/tree/master',
-   
+
     },
     {
       title: 'DevScout',
@@ -173,21 +208,21 @@ Match the target hue before time runs out and see how accurate your eyes really 
       githubUrl: 'https://github.com/rajank18/DevScout',
       liveUrl: 'https://dev-scout-hazel.vercel.app/'
     },
-    {
-      title: 'LOL VibeCoder',
-      category: 'web',
-      description: 'Full-stack web app that analyzes GitHub repositories to detect if code is "vibe-coded" or not',
-      tech: [
-        { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-        { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-        { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-        { name: 'Gemini', icon: 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://gemini.google.com&size=64' }
-      ],
-      status: 'Developed',
-      githubUrl: 'https://github.com/rajank18/LOL-VibeCoder/tree/master',
-      liveUrl: ''
-    },
-    
+    // {
+    //   title: 'LOL VibeCoder',
+    //   category: 'fun',
+    //   description: 'Full-stack web app that analyzes GitHub repositories to detect if code is "vibe-coded" or not',
+    //   tech: [
+    //     { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+    //     { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+    //     { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+    //     { name: 'Gemini', icon: 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://gemini.google.com&size=64' }
+    //   ],
+    //   status: 'Developed',
+    //   githubUrl: 'https://github.com/rajank18/LOL-VibeCoder/tree/master',
+    //   liveUrl: ''
+    // },
+
   ];
 
   const getStatusColor = (status) => {
@@ -203,10 +238,23 @@ Match the target hue before time runs out and see how accurate your eyes really 
 
   const filteredProjects = projects.filter((project) => project.category === activeCategory);
   const isPackageOpened = activeCategory === 'packages';
+  const funProjects = projects.filter((project) => project.category === 'fun');
+  const safeFunIndex = funProjects.length > 0 ? (funIndex % funProjects.length + funProjects.length) % funProjects.length : 0;
+  const currentFunProject = funProjects[safeFunIndex] || null;
+
+  const handlePrevFun = () => {
+    setFunIndex((prev) => (prev > 0 ? prev - 1 : funProjects.length - 1));
+  };
+
+  const handleNextFun = () => {
+    setFunIndex((prev) => (prev < funProjects.length - 1 ? prev + 1 : 0));
+  };
+
   const webTryNowTitles = new Set([
     'StudioX',
     'ScanX Toolkit',
     'Hue Did It',
+    'dizzywave',
     'DevScout',
     'LOL VibeCoder',
     'ApplyASAP',
@@ -248,7 +296,7 @@ Match the target hue before time runs out and see how accurate your eyes really 
         <h2 className="text-5xl md:text-6xl font-bold mb-6 text-center text-black dark:text-white">Projects</h2>
 
         <div className="mb-6 flex justify-center px-2">
-          <div className="inline-flex items-center gap-2 rounded-full border border-black/15 dark:border-white/15 bg-white/85 dark:bg-black/55 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur-md  ">
+          <div className="inline-flex items-center gap-2 rounded-full border border-black/15 dark:border-white/15 bg-white/85 dark:bg-black/55 p-2 backdrop-blur-md  ">
             {categories.map((category) => {
               const isActive = activeCategory === category.id;
               const iconSrc = category.id === 'packages' && isPackageOpened ? category.activeIcon : category.icon;
@@ -267,7 +315,7 @@ Match the target hue before time runs out and see how accurate your eyes really 
                   {isActive && (
                     <motion.span
                       layoutId="activeProjectCategory"
-                      className="absolute inset-0 rounded-full bg-black dark:bg-white"
+                      className="absolute inset-0 rounded-full bg-black backdrop-blur-sm dark:bg-white"
                       transition={{
                         type: 'spring',
                         stiffness: 360,
@@ -293,89 +341,288 @@ Match the target hue before time runs out and see how accurate your eyes really 
           </div>
         </div>
 
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center items-start transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${isSwitchingCategory ? 'opacity-0 translate-y-2 pointer-events-none' : 'opacity-100 translate-y-0'}`}>
-          {filteredProjects.map((project) => (
-            <div
-              key={project.title}
-              className="group relative w-full max-w-[360px] bg-white dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80 p-6 pb-32 hover:shadow-xl transition-all duration-300 cursor-pointer"
-            >
-              {/* Content */}
-                <div className="z-10">
-                <h3 className="text-[1.7rem] font-bold mb-2 text-gray-900 dark:text-gray-100 leading-tight">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 min-h-24">
-                  {project.description}
-                </p>
-
-                {/* Status badge */}
-                {/* <div className="flex items-center gap-2 mb-4">
-                  <div className={`w-2 h-2 rounded-full ${getStatusColor(project.status)}`}></div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">{project.status}</span>
-                </div> */}
-
-                {/* Technologies with logos */}
-                <div className="mb-3">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 font-medium">Technologies</p>
-                  <div className="flex flex-wrap gap-3">
-                    {project.tech.map((tech, techIdx) => (
-                      <div 
-                        key={techIdx}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 dark:bg-gray-700 border border-gray-200/80 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium"
+        <div className={`transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${isSwitchingCategory ? 'opacity-0 translate-y-2 pointer-events-none' : 'opacity-100 translate-y-0'}`}>
+          {activeCategory === 'fun' && currentFunProject ? (
+            <div className="w-full max-w-[760px] mx-auto ">
+              {/* Carousel Header Controls */}
+              <div className="flex items-center justify-center gap-3 mb-4 px-1">
+                {/* Project Selector Pills */}
+                <div className="flex items-center gap-1.5 overflow-x-auto py-1 scrollbar-none">
+                  {funProjects.map((proj, idx) => {
+                    const isSelected = idx === safeFunIndex;
+                    return (
+                      <button
+                        key={proj.title}
+                        type="button"
+                        onClick={() => setFunIndex(idx)}
+                        className={`px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 shrink-0 ${isSelected
+                          ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
+                          : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                          }`}
                       >
-                        <img src={tech.icon} alt={tech.name} className="w-4.5 h-4.5 object-contain" />
-                        <span>{tech.name}</span>
-                      </div>
-                    ))}
-                  </div>
+                        {proj.title}
+                      </button>
+                    );
+                  })}
                 </div>
 
-                <div className="absolute bottom-4 left-4 right-4 z-20">
-                  {/* View Details Link */}
-                  {getViewDetailsUrl(project) ? (
-                    <a 
-                      href={getViewDetailsUrl(project)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-sm font-medium text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                {/* Carousel Prev/Next & Counter */}
+                {/* <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-xs font-mono text-gray-500 dark:text-gray-400 font-medium">
+                    {safeFunIndex + 1} / {funProjects.length}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={handlePrevFun}
+                      aria-label="Previous interactive project"
+                      title="Previous project"
+                      className="w-8 h-8 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                     >
-                      <span>View Details</span>
-                      <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
-                    </a>
-                  ) : (
-                    <span className="flex items-center text-sm font-medium text-gray-300 dark:text-gray-600">
-                      <span>View Details</span>
-                      <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextFun}
+                      aria-label="Next interactive project"
+                      title="Next project"
+                      className="w-8 h-8 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
-                    </span>
-                  )}
+                    </button>
+                  </div>
+                </div> */}
+              </div>
 
-                  <div className={`mt-5 ${project.category === 'web' ? 'min-h-10 flex justify-end' : ''}`}>
-                    {project.category === 'web' && webTryNowTitles.has(project.title) && getTryNowUrl(project) && (
+              {/* Single Carousel Browser Window */}
+              <div className="w-full border border-gray-200/90 dark:border-gray-700/90 bg-white dark:bg-gray-800 overflow-hidden shadow-xl transition-all duration-300">
+                {/* Browser Window Header */}
+                <div className="flex items-center justify-between px-4 py-1.5 bg-gray-100/90 dark:bg-gray-900 border-b border-gray-200/80 dark:border-gray-700/80 select-none gap-2">
+                  <div className="flex items-center gap-2">
+                    {/* <div className="w-3 h-3 rounded-full bg-[#ff5f56]/90"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#ffbd2e]/90"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#27c93f]/90"></div> */}
+
+                    {/* Browser Prev/Next Mini Buttons */}
+                    <div className="flex items-center gap-1 ml-2">
+                      <button
+                        type="button"
+                        onClick={handlePrevFun}
+                        title="Previous project"
+                        className="p-1 rounded text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleNextFun}
+                        title="Next project"
+                        className="p-1 rounded text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs text-gray-600 dark:text-gray-300 font-mono shadow-xs max-w-[260px] sm:max-w-xs truncate">
+                    <svg className="w-3 h-3 -mt-0.5 text-gray-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="truncate">
+                      {currentFunProject.liveUrl ? currentFunProject.liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'interactive-demo'}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {currentFunProject.liveUrl && (
                       <a
-                        href={getTryNowUrl(project)}
+                        href={currentFunProject.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-none border-2 border-black text-black bg-transparent px-3.5 py-1.5 text-sm font-semibold transition-all duration-300 hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black"
+                        title="Open full site in new tab"
+                        className="p-1 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors"
                       >
-                        <span>Try Now</span>
-                        <img
-                          src={rightArrowIcon}
-                          alt=""
-                          aria-hidden="true"
-                          className="h-4 w-4 object-contain dark:invert translate-y-0.5"
-                        />
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
                       </a>
                     )}
                   </div>
                 </div>
+
+                {/* Live Interactive Window Frame with AnimatePresence */}
+                <div className="relative w-full h-[400px] sm:h-[450px] bg-black overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentFunProject.title}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      className="w-full h-full"
+                    >
+                      <iframe
+                        src={currentFunProject.liveUrl || 'https://huedidit.vercel.app/'}
+                        title={`${currentFunProject.title} - Interactive Preview`}
+                        className="w-full h-full border-0"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Window Bottom Info */}
+                <div className="px-4 py-3 bg-white dark:bg-gray-800 border-t border-gray-200/80 dark:border-gray-700/80 space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
+                        {currentFunProject.title}
+                      </h3>
+                      {/* Tech Stack Pills */}
+                      {currentFunProject.tech && currentFunProject.tech.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {currentFunProject.tech.map((tech, techIdx) => (
+                            <div
+                              key={techIdx}
+                              className="flex items-center gap-1 px-1.5 py-0.5 bg-gray-50/90 dark:bg-gray-700 border border-gray-200/80 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-xs font-medium"
+                            >
+                              <img src={tech.icon} alt={tech.name} className="w-3.5 h-3.5 object-contain" />
+                              <span>{tech.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      {getViewDetailsUrl(currentFunProject) && (
+                        <a
+                          href={getViewDetailsUrl(currentFunProject)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold border border-gray-300 dark:border-gray-600 text-black dark:text-white hover:border-black dark:hover:border-white transition-colors"
+                        >
+                          <span>GitHub</span>
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      )}
+
+                      {currentFunProject.liveUrl && (
+                        <a
+                          href={currentFunProject.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-black text-white dark:bg-white dark:text-black hover:opacity-90 transition-opacity"
+                        >
+                          <span>Full Screen</span>
+                          <img
+                            src={rightArrowIcon}
+                            alt=""
+                            aria-hidden="true"
+                            className="h-3 w-3 object-contain invert dark:invert-0"
+                          />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 w-full leading-relaxed">
+                    {currentFunProject.description}
+                  </p>
+                </div>
               </div>
             </div>
-          ))}
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center items-start">
+              {filteredProjects.map((project) => (
+                <div
+                  key={project.title}
+                  className="group relative w-full max-w-[360px] bg-white dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80 p-6 pb-32 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                >
+                  {/* Content */}
+                  <div className="z-10">
+                    <h3 className="text-[1.7rem] font-bold mb-2 text-gray-900 dark:text-gray-100 leading-tight">
+                      {project.title}
+                    </h3>
+
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 min-h-24">
+                      {project.description}
+                    </p>
+
+                    {/* Technologies with logos */}
+                    <div className="mb-3">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 font-medium">Technologies</p>
+                      <div className="flex flex-wrap gap-3">
+                        {project.tech.map((tech, techIdx) => (
+                          <div
+                            key={techIdx}
+                            className="flex items-center gap-2 px-2 py-1  bg-gray-50/90 dark:bg-gray-700 border border-gray-200/80 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium"
+                          >
+                            <img src={tech.icon} alt={tech.name} className="w-4.5 h-4.5 object-contain" />
+                            <span>{tech.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="absolute bottom-4 left-4 right-4 z-20">
+                      {/* View Details Link */}
+                      {getViewDetailsUrl(project) ? (
+                        <a
+                          href={getViewDetailsUrl(project)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-sm font-medium text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                        >
+                          <span>View Details</span>
+                          <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </a>
+                      ) : (
+                        <span className="flex items-center text-sm font-medium text-gray-300 dark:text-gray-600">
+                          <span>View Details</span>
+                          <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </span>
+                      )}
+
+                      <div className={`mt-5 ${(project.category === 'web' || project.category === 'fun') ? 'min-h-10 flex justify-end' : ''}`}>
+                        {(project.category === 'web' || project.category === 'fun') && webTryNowTitles.has(project.title) && getTryNowUrl(project) && (
+                          <a
+                            href={getTryNowUrl(project)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-none border-2 border-black text-black bg-transparent px-3.5 py-1.5 text-sm font-semibold transition-all duration-300 hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black"
+                          >
+                            <span>Try Now</span>
+                            <img
+                              src={rightArrowIcon}
+                              alt=""
+                              aria-hidden="true"
+                              className="h-4 w-4 object-contain dark:invert translate-y-0.5"
+                            />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

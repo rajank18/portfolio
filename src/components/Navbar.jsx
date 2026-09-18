@@ -96,22 +96,22 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Fade overlay at top */}
-      <div className="fixed top-0 left-0 right-0 h-44 bg-linear-to-b from-white dark:from-gray-900 via-white dark:via-gray-900 to-transparent z-40 pointer-events-none"></div>
+      {/* Fade overlay at top for md & lg */}
+      <div className="hidden md:block fixed top-0 left-0 right-0 h-44 bg-linear-to-b from-white dark:from-gray-900 via-white dark:via-gray-900 to-transparent z-40 pointer-events-none"></div>
 
-      <nav className="fixed top-4 left-0 right-0 z-50 md:top-6">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 md:bg-transparent py-1.5 md:py-0 md:top-6">
         <div className="mx-auto w-full max-w-[720px] px-3 flex items-center justify-between gap-2 md:px-6 md:gap-8">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <button
               type="button"
               onClick={scrollToTop}
-              className=" md:block shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+              className="shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
               aria-label="Go to top"
             >
               <img
                 src={profileImg}
                 alt="Profile"
-                className="w-12 h-12 border-2 border-gray-300 dark:border-gray-200 object-cover"
+                className="w-8 h-8 md:w-12 md:h-12 border md:border-2 border-gray-300 dark:border-gray-200 object-cover"
               />
             </button>
           </div>
@@ -122,7 +122,7 @@ const Navbar = () => {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className="relative lg:text-[1rem] md:text-[1rem] font-medium text-gray-600 transition-colors group cursor-pointer whitespace-nowrap hover:text-black dark:text-gray-300 dark:hover:text-white text-[0.75rem]"
+                className="relative lg:text-[1rem] md:text-[1rem] font-medium text-gray-600 transition-colors group cursor-pointer whitespace-nowrap hover:text-black dark:text-gray-300 dark:hover:text-white text-[0.72rem] sm:text-[0.75rem]"
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-black dark:bg-white transition-all duration-300 group-hover:w-full"></span>
@@ -135,13 +135,13 @@ const Navbar = () => {
             <button
               ref={buttonRef}
               onClick={toggleTheme}
-              className="ml-0 p-1  border-2 border-gray-300 dark:border-gray-200 rounded-full transition-opacity hover:opacity-70 cursor-pointer md:ml-2"
+              className="ml-0 p-1 border md:border-2 border-gray-300 dark:border-gray-200 rounded-full transition-opacity hover:opacity-70 cursor-pointer md:ml-2"
               aria-label="Toggle theme"
             >
               {isDark ? (
                 // Sun icon
                 <svg
-                  className="w-5 h-5 text-gray-900 dark:text-gray-100"
+                  className="w-4 h-4 md:w-5 md:h-5 text-gray-900 dark:text-gray-100"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -156,7 +156,7 @@ const Navbar = () => {
               ) : (
                 // Moon icon
                 <svg
-                  className="w-5 h-5 text-gray-900 dark:text-gray-100"
+                  className="w-4 h-4 md:w-5 md:h-5 text-gray-900 dark:text-gray-100"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
