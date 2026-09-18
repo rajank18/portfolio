@@ -203,11 +203,11 @@ const NekoCat = () => {
           resetTimerRef.current = setTimeout(() => {
             petCountRef.current = 0;
             nextMilestoneRef.current = 15;
-          }, 3500);
+          }, 2000);
 
           // Check if continuous taps reached milestone (>15, then >30, etc.)
           if (petCountRef.current >= nextMilestoneRef.current) {
-            nextMilestoneRef.current += 15; // Next trigger at +15 (e.g. 30)
+            nextMilestoneRef.current += 20; // Next trigger at +15 (e.g. 30)
             playCatVideo(centerX, centerY);
             return;
           }
