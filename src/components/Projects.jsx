@@ -488,7 +488,7 @@ Upload resume, company name and JD, generate instantly.`,
                 </div>
 
                 {/* Live Interactive Window Frame with AnimatePresence */}
-                <div className="relative w-full h-[400px] sm:h-[450px] bg-black overflow-hidden">
+                <div data-interactive-window="true" className="relative w-full h-[400px] sm:h-[450px] bg-black overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentFunProject.title}

@@ -99,7 +99,7 @@ const SpotifyWidget = () => {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto my-4">
+    <div className="w-full max-w-xl mx-auto my-4">
       <a
         href={spotifyData.songUrl}
         target="_blank"

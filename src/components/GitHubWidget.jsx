@@ -11,7 +11,6 @@ const lightTheme = {
   cellLevel2: '#989898ff',  //low cont
   cellLevel3: '#4e4e4eff',  //mid cont
   cellLevel4: '#2c2c2cff',  //high cont
-  cellBorderColor: 'rgba(0, 0, 0, 0.06)',
   cellOutlineColor: 'transparent',
   borderColor: 'transparent',
   cellSize: '8.5px',
@@ -28,7 +27,6 @@ const darkTheme = {
   cellLevel2: '#989898ff',  //low cont
   cellLevel3: '#b6b6b6ff',  //mid cont
   cellLevel4: '#e9e9e9ff',  //high cont
-  cellBorderColor: 'rgba(255, 255, 255, 0.05)',
   cellOutlineColor: 'transparent',
   borderColor: 'transparent',
   cellSize: '8.5px',
