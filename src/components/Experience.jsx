@@ -10,18 +10,17 @@ const Experience = () => {
 
   const experiences = [
     {
+      year: 'Aug 2026 – Present',
+      title: 'Frontend Engineering Intern',
+      company: 'PARQIS',
+      description: 'Developing the PARQIS E-Commerce platform using Next.js, React, and Tailwind CSS. Built 15+ responsive pages, 30+ reusable UI components, and integrated profile APIs for optimized state management.',
+    },
+    {
       year: 'May 2025 - June 2025',
       title: 'Web Developement Intern',
       company: 'Param Counsulting Service, India',
-      description: 'Developed Web applications using modern frameworks and technologies for one of their major clients.',
+      description: 'Delivered 12+ responsive React pages in under 2 months using React, Tailwind, and GSAP for animations. Contributed to client-focused UI layouts with cross-browser compatibility.',
     },
-    {
-      year: 'Feb 2025',
-      title: 'App Development Intern',
-      company: 'Technohacks',
-      description: 'Got hands-on experience in app development using Flutter and Dart',
-    },
-   
   ];
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const Experience = () => {
         <h2 className="text-5xl md:text-6xl font-bold mb-6 text-center text-black dark:text-white">Experience</h2>
         <div ref={timelineRef} className="space-y-10">
           {experiences.map((exp, idx) => (
-            <div 
+            <div
               key={idx}
               className="relative pl-8 pr-2 border-l-2 border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white transition-colors duration-300"
             >
