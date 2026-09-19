@@ -13,7 +13,21 @@ const Experience = () => {
       year: 'Aug 2026 – Present',
       title: 'Frontend Engineering Intern',
       company: 'PARQIS',
-      description: 'Developing the PARQIS E-Commerce platform using Next.js, React, and Tailwind CSS. Built 15+ responsive pages, 30+ reusable UI components, and integrated profile APIs for optimized state management.',
+      link: 'https://parqis.com',
+      description: (
+        <>
+          Developing the{' '}
+          <a
+            href="https://parqis.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold underline text-black dark:text-white hover:opacity-80 transition-opacity"
+          >
+            PARQIS
+          </a>{' '}
+          E-Commerce platform using Next.js, React, and Tailwind CSS. Built 15+ responsive pages, 30+ reusable UI components, and integrated profile APIs for optimized state management.
+        </>
+      ),
     },
     {
       year: 'May 2025 - June 2025',
